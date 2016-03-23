@@ -1,0 +1,41 @@
+<html>
+<head>
+	<title>CALENDAR PROJECT - PROSOFT PROGRAMMING EXERCISE</title>
+	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="css/styles.css" type="text/css" charset="utf-8"/>   
+	<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+	<!-- 
+		This project is programmed in JavaScript and PHP
+		3rd party software used:
+			-jQuery
+			-masked input plugin for jQuery
+			-validate for jQuery
+	-->
+</head>
+<body>
+<form action="php/calendar.php" method="post" id="usrInput-form" >
+<div class="inputForm">
+	<div>
+		<label for="usrDate">Start Date:</label>
+		<input type="text" name="usrDate" id="usrDate" value="" required />
+	</div>
+	<div>
+		<label for="nbrDays">Number of days:</label>
+		<input type="text" name="nbrDays" id="nbrDays" value="" required />
+	</div>
+	<div>
+		<label for="ctryCode">Country Code:</label>
+		<input type="text" name="ctryCode" id="ctryCode" value="" minlength="2" required />
+	</div>	
+	<div>
+		<input type="submit" name="button" id="button1" value="PRESS" />
+	</div>
+</div>
+	<input type="hidden" name="hdata" id="hdata" />
+</form>
+<div id="result">
+</div>
+<script src="js/3rdparty/jquery.maskedinput.min.js" type="text/javascript"></script>
+<script src="js/formMgr.js"></script>
+</body>
+</html>
