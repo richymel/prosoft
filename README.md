@@ -30,13 +30,17 @@ Start time: 21:00 BOLIVIAN TIME
 
 a. A list of any requirements you could not implement.
 
-	- Holiday info
+	- Holiday info rollover label.
+	- Handle holiday API exceptions, I tested it with US country code only...
+	- Limit holiday lookup only for 2008... (Did not pay attn to that detail, sorry).
 
 
 b. Bugs you’ve identified but didn’t have time to fix.
 
-	- Input date validation
+	- Better input validation
+	- Handle API exceptions	
 
 c. Things you would do if you had more time to complete the task.
 
-	- Holiday info
+	- Handle holiday info according to the feature requirements.
+	- Better validation for user input fields.
