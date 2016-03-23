@@ -5,18 +5,20 @@
 </head>
 <body>
 <?php 
+/*
 	echo $_POST["usrDate"] . "<br>";
 	echo $_POST["nbrDays"] . "<br>"; 
 	echo $_POST["ctryCode"] . "<br>"; 
 	echo $_POST["hdMonths"] . "<br>"; 
 	echo $_POST["hdEndDate"] . "<br>"; 
+	*/
 	$country = $_POST["ctryCode"];
 	$myDate = $_POST["usrDate"];
 	$months = $_POST["hdMonths"];
 	$endDate = $_POST["hdEndDate"];
 	list($month, $day, $year1) = split('[/.-]', $myDate);
 	list($year2,$month2,$day2)= split('[/.-]', $endDate);
-	echo $year2."--".$month2."--".$day2;
+	//echo $year2."--".$month2."--".$day2;
 	$year = $year1; //initialize year
 	//Do for as many months is needed:	
 	for ($mm = 0; $mm <= $months; $mm++):		

@@ -53,8 +53,6 @@ $( "#usrInput-form" ).submit(function( event ) {
 
     $("#hdMonths").val(months);
     $("#hdEndDate").val(endDate.toISOString().substring(0, 10));
-
-    alert(); 
 });
 
 //Month is 1 based
