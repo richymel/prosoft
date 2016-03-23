@@ -20,3 +20,23 @@ Start time: 21:00 BOLIVIAN TIME
 	- Year rollover is not handled correctly.
 	- Last day on year rollover fails.
 	- Weekends are not calculated and rendered correctly.
+
+3rd Deployment: 23:28
+
+	- Fixed weekend display
+	- Fixed yr rollover
+	- Rollover last day fixed
+
+
+a. A list of any requirements you could not implement.
+
+	- Holiday info
+
+
+b. Bugs you’ve identified but didn’t have time to fix.
+
+	- Input date validation
+
+c. Things you would do if you had more time to complete the task.
+
+	- Holiday info

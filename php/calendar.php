@@ -14,16 +14,24 @@
 	$myDate = $_POST["usrDate"];
 	$months = $_POST["hdMonths"];
 	$endDate = $_POST["hdEndDate"];
-	list($month, $day, $year) = split('[/.-]', $myDate);
+	list($month, $day, $year1) = split('[/.-]', $myDate);
 	list($year2,$month2,$day2)= split('[/.-]', $endDate);
 	echo $year2."--".$month2."--".$day2;
-	//Do for as many months is needed:
-	for ($mm = 0; $mm <= $months; $mm++):
+	$year = $year1; //initialize year
+	//Do for as many months is needed:	
+	for ($mm = 0; $mm <= $months; $mm++):		
 		$myMonth = $month + $mm;
+		//Check year rollover
+		if ($myMonth>12) {
+			//echo 'We have year rollover $mm:'.$mm.'$myMonth:'.$myMonth;
+			$year = $year1 + intval($myMonth / 12.5);
+			$myMonth -= intval($myMonth / 12.5) * 12;
+			
+			//echo '$myMonth:'.$myMonth.' year:'.$year;
+		}
 		if (strlen($myMonth)<2) {
 			$myMonth = str_pad($myMonth, 2, '0', STR_PAD_LEFT);
 		}
-		if ($mm>0 & $myMonth==1) { $year += 1; echo "Year: ".$year . "<br>"; }
 
 		$days_in_month = date('t',mktime(0,0,0,$myMonth,1,$year));
 		
@@ -37,7 +45,7 @@
 		}
 		//echo "myMonth:".$myMonth."</BR>";
 
-		echo "Days in month:".$days_in_month."<br>";
+		//echo "Days in month:".$days_in_month."<br>";
 		echo getCal($country,$myMonth,$year,$day,$days_in_month);
 	endfor;
 
@@ -91,7 +99,9 @@ function getCal($country,$month,$year,$startDay, $days_in_month){
 		if ($holiday) {
 				$calendar.= '<td class="calendar-day-ho">';
 		} else {
-
+			if (strlen($list_day)<2) {
+				$list_day = str_pad($list_day, 2, '0', STR_PAD_LEFT);
+			}
 			if (isWeekend($year.$month.$list_day)) {
 				$calendar.= '<td class="calendar-day-we">';
 			} else {
@@ -132,8 +142,9 @@ function getCal($country,$month,$year,$startDay, $days_in_month){
 	return $calendar;
 }
 
-function isWeekend($date) {
+function isWeekend($date) {	
     $weekDay = date('w', strtotime($date));
+    //echo $date."= ".$weekDay . " // ";
     return ($weekDay == 0 || $weekDay == 6);
 }
 function getHolidays($country,$year,$month) { 
