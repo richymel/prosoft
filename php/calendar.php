@@ -8,24 +8,40 @@
 	echo $_POST["usrDate"] . "<br>";
 	echo $_POST["nbrDays"] . "<br>"; 
 	echo $_POST["ctryCode"] . "<br>"; 
-	echo $_POST["hdata"] . "<br>"; 
+	echo $_POST["hdMonths"] . "<br>"; 
+	echo $_POST["hdEndDate"] . "<br>"; 
 	$country = $_POST["ctryCode"];
 	$myDate = $_POST["usrDate"];
-	$months = $_POST["hdata"];
+	$months = $_POST["hdMonths"];
+	$endDate = $_POST["hdEndDate"];
 	list($month, $day, $year) = split('[/.-]', $myDate);
-
+	list($year2,$month2,$day2)= split('[/.-]', $endDate);
+	echo $year2."--".$month2."--".$day2;
 	//Do for as many months is needed:
 	for ($mm = 0; $mm <= $months; $mm++):
 		$myMonth = $month + $mm;
 		if (strlen($myMonth)<2) {
 			$myMonth = str_pad($myMonth, 2, '0', STR_PAD_LEFT);
 		}
-		if ($mm>0) {$day = '01'; }//Next months always begin on first day.
+		if ($mm>0 & $myMonth==1) { $year += 1; echo "Year: ".$year . "<br>"; }
+
+		$days_in_month = date('t',mktime(0,0,0,$myMonth,1,$year));
+		
+		//Next months always begin on first day.
+		if ($mm>0) {
+			$day = '01'; 
+			//If it is the last month to process, assign last day passed in hdEndDate
+			if ($myMonth==$month2) {
+				$days_in_month = $day2;
+			}						
+		}
 		//echo "myMonth:".$myMonth."</BR>";
-		echo getCal($country,$myMonth,$year,$day,$months);
+
+		echo "Days in month:".$days_in_month."<br>";
+		echo getCal($country,$myMonth,$year,$day,$days_in_month);
 	endfor;
 
-function getCal($country,$month,$year,$startDay){
+function getCal($country,$month,$year,$startDay, $days_in_month){
 
 	/* draw table */
 	$calendar = '<table cellpadding="0" cellspacing="0" class="calendar">';
@@ -44,7 +60,7 @@ function getCal($country,$month,$year,$startDay){
 	/* days and weeks vars now ... */
 	$running_day = date('w',mktime(0,0,0,$month,$startDay,$year));
 	//echo "Running day:".$running_day;	
-	$days_in_month = date('t',mktime(0,0,0,$month,1,$year));
+	////$days_in_month = date('t',mktime(0,0,0,$month,1,$year));
 	$days_in_this_week = 1;
 	$day_counter = 0;
 	$dates_array = array();
@@ -62,7 +78,6 @@ function getCal($country,$month,$year,$startDay){
 
 	//var_dump($monthsHolidays);
 	//echo count($monthsHolidays['holidays']);
-
 
 	/* keep going with days.... */
 	for($list_day = $startDay; $list_day <= $days_in_month; $list_day++):

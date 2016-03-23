@@ -49,8 +49,10 @@ $( "#usrInput-form" ).submit(function( event ) {
     console.log("daysInMonth:"+daysInMonth(i[0],i[2]));
     console.log('months: ', months);
     console.log('endDate: ', endDate);
+    console.log('formatted endDate: ', endDate.toISOString().substring(0, 10));
 
-    $("#hdata").val(months);  
+    $("#hdMonths").val(months);
+    $("#hdEndDate").val(endDate.toISOString().substring(0, 10));
 
     alert(); 
 });
